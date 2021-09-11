@@ -5,6 +5,7 @@ import (
 	"github.com/nsqio/go-nsq"
 	"github.com/uzzeet/uzzeet-gateway/libs/helper/serror"
 	"log"
+	"os"
 )
 
 type nsqUsecase struct {
@@ -17,7 +18,7 @@ func NewNsqUsecase() service.NsqUsecase {
 func (f nsqUsecase) SenderNSQUsecase(form []byte) (serr serror.SError) {
 
 	config := nsq.NewConfig()
-	producer, err := nsq.NewProducer("192.168.9.171:4150", config)
+	producer, err := nsq.NewProducer(os.Getenv("NSQ_SERVER"), config)
 	if err != nil {
 		log.Fatal(err)
 	}

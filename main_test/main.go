@@ -31,7 +31,7 @@ func main() {
 		log.Fatal(err)
 	}
 	consumer.AddHandler(&messageHandler{})
-	consumer.ConnectToNSQLookupd("192.168.9.171:4161")
+	consumer.ConnectToNSQLookupd(os.Getenv("NSQ_SERVER"))
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 	<-sigChan
