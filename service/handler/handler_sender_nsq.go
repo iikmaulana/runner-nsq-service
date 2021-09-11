@@ -40,6 +40,6 @@ func (ox gatewayHandler) SenderNsq(ctx *gin.Context) {
 		return
 	}
 
-	lib.Response(http.StatusOK, "", appid, svcid, controller, ctx.Request.Method, "", ctx)
+	lib.Response(http.StatusOK, "", appid, svcid, controller, ctx.Request.Method, "success sender nsq", ctx)
 	return
 }
