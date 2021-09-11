@@ -14,12 +14,17 @@ var controller = "nsq-usage"
 
 func (ox gatewayHandler) SenderNsq(ctx *gin.Context) {
 
-	/*errx := lib.IsAdmin(ctx)
+	res, errx := lib.ClaimToken(ctx.Request.Header["Authorization"])
 	if errx != nil {
 		serr := serror.NewFromError(errx)
 		lib.Response(http.StatusBadRequest, serr.Error(), appid, svcid, serr.File(), ctx.Request.Method, "", ctx)
 		return
-	}*/
+	}
+	if res.Username != "nsq" {
+		serr := serror.NewFromError(errx)
+		lib.Response(http.StatusUnauthorized, serr.Error(), appid, svcid, serr.File(), ctx.Request.Method, "", ctx)
+		return
+	}
 
 	jsonData, err := ioutil.ReadAll(ctx.Request.Body)
 	if err != nil {
