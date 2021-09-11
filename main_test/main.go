@@ -24,8 +24,8 @@ func main() {
 	config.MaxInFlight = 5
 	config.MaxRequeueDelay = time.Second * 900
 	config.DefaultRequeueDelay = time.Second * 0
-	topic := "test_satu"
-	channel := "tester"
+	topic := os.Getenv("NSQ_TOPIC")
+	channel := os.Getenv("NSQ_CHANNEL")
 	consumer, err := nsq.NewConsumer(topic, channel, config)
 	if err != nil {
 		log.Fatal(err)

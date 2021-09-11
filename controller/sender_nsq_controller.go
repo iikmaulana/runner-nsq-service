@@ -23,7 +23,7 @@ func (f nsqUsecase) SenderNSQUsecase(form []byte) (serr serror.SError) {
 		log.Fatal(err)
 	}
 
-	topic := "test_satu"
+	topic := os.Getenv("NSQ_TOPIC")
 	err = producer.Publish(topic, form)
 	if err != nil {
 		return serror.NewFromError(err)
